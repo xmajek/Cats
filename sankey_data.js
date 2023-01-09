@@ -106,11 +106,9 @@ function count(){
     for(let n in breed_names){
         counted.breeds[breed_names[n]] = cats.reduce((acc, cur) => cur.breedname === breed_names[n] ? ++acc : acc, 0);
     }
-    const sortable = Object.fromEntries(
-        Object.entries(counted.breeds).sort(([,a],[,b]) => a-b)
-    );
-
-    counted.breeds = sortable
+    counted.breeds = Object.fromEntries(
+        Object.entries(counted.breeds).sort(([, a], [, b]) => a - b)
+    )
 
     // kolory
     const colors = [...new Set(cats.map(item => item.basecolour))];
@@ -183,4 +181,3 @@ function make_connections(){
 
 let rects = []
 
-console.log(counted)
