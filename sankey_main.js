@@ -19,20 +19,22 @@ function setup() {
 
 function draw() {
     noLoop()
-    create_s(colors)
+    if(colors.length > 0) sankey_mono(colors)
+    else create_s()
     colors = []
 }
 
-// function mouseClicked(){
-//     let el = rects.find(el => mouseX >= el.x && mouseX <= el.x + el.width && mouseY >= el.y && mouseY <= el.y + el.height)
-//     if(el){
-//         colors.push(color(201, 199, 200, 255))
-//         colors.push(el.color)
-//         colors.push(el.element)
-//         rects = []
-//         clear()
-//         redraw()
-//     }
-// }
+function mouseClicked(){
+    let el = rects.find(el => mouseX >= el.x && mouseX <= el.x + el.width && mouseY >= el.y && mouseY <= el.y + el.height)
+    if(el){
+        colors.push(color(201, 199, 200, 255))
+        el.colorize(el.element)
+        colors.push(el.color)
+        colors.push(el.element)
+        rects = []
+        clear()
+        redraw()
+    }
+}
 
 

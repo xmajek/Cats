@@ -9,12 +9,12 @@ class SankeyRect{
         this.connected = 0
     }
     draw(x, y){
-        noStroke()
         fill(this.color);
         rect(x, y, this.width, this.height)
         this.x = x
         this.y = y
     }
+
 
     colorize(element){
         switch (element){
