@@ -1,23 +1,11 @@
-let animal_data
-let cats = []
-// JSON
-function preload() {
-    animal_data = loadJSON('animal-data.json', 'json');
+let counted = {
+    "sex": {},
+    "age": {},
+    "colors": {},
+    "breeds": {},
+    "movement": {}
 }
-function setup() {
-    createCanvas(1890, 930);
-
-    clean_data()
-    // console.log(JSON.stringify(cats))
-
-
-}
-
-function draw() {
-    noLoop()
-    background(255);
-    create_s()
-}
+let connections = []
 
 function clean_data(){
     let animal
@@ -71,6 +59,9 @@ function clean_data(){
         if(age.includes("day") || age.includes("week")){
             animal.animalage = "Kitten"
         }
+        else if(age.includes("11 years") || age.includes("12 years") || age.includes("13 years") || age.includes("14 years")){
+            animal.animalage = "Senior"
+        }
         else if(age.includes("1 year") || age.includes("2 years") || age[2] === "m" || age[3] === "m"){
             animal.animalage = "Junior"
         }
@@ -79,9 +70,6 @@ function clean_data(){
         }
         else if(age.includes("7 years") || age.includes("8 years") || age.includes("9 years") || age.includes("10 years")){
             animal.animalage = "Mature"
-        }
-        else if(age.includes("11 years") || age.includes("12 years") || age.includes("13 years") || age.includes("14 years")){
-            animal.animalage = "Senior"
         }
         else {
             animal.animalage = "Super Senior"
@@ -112,3 +100,87 @@ function clean_data(){
     }
 }
 
+function count(){
+    // rasy
+    const breed_names = [...new Set(cats.map(item => item.breedname))];
+    for(let n in breed_names){
+        counted.breeds[breed_names[n]] = cats.reduce((acc, cur) => cur.breedname === breed_names[n] ? ++acc : acc, 0);
+    }
+    const sortable = Object.fromEntries(
+        Object.entries(counted.breeds).sort(([,a],[,b]) => a-b)
+    );
+
+    counted.breeds = sortable
+
+    // kolory
+    const colors = [...new Set(cats.map(item => item.basecolour))];
+    for(let n in colors){
+        counted.colors[colors[n]] = cats.reduce((acc, cur) => cur.basecolour === colors[n] ? ++acc : acc, 0);
+    }
+
+    //wiek
+    const age = [...new Set(cats.map(item => item.animalage))];
+    const age_order = []
+    age_order.push(age[4])
+    age_order.push(age[3])
+    age_order.push(age[2])
+    age_order.push(age[0])
+    age_order.push(age[1])
+    age_order.push(age[5])
+
+    for(let n in age_order){
+        counted.age[age_order[n]] = cats.reduce((acc, cur) => cur.animalage === age_order[n] ? ++acc : acc, 0);
+    }
+
+    //plec
+    const sex = [...new Set(cats.map(item => item.sexname))];
+    for(let n in sex){
+        counted.sex[sex[n]] = cats.reduce((acc, cur) => cur.sexname === sex[n] ? ++acc : acc, 0);
+    }
+
+    //status
+    const movement = [...new Set(cats.map(item => item.movementtype))];
+    for(let n in movement){
+        counted.movement[movement[n]] = cats.reduce((acc, cur) => cur.movementtype === movement[n] ? ++acc : acc, 0);
+    }
+    connections = [breed_names, colors, age, sex, movement]
+}
+
+function make_connections(){
+    let cat_pairs = []
+
+    for(let x in connections){
+        for(let y in connections){
+            if(x > y){
+                for(let a in connections[x]){
+                    for(let b in connections[y]){
+                        cat_pairs.push([connections[x][a], connections[y][b], 0])
+                    }
+                }
+            }
+        }
+    }
+
+    for(let c in cats){
+        for(let p in cat_pairs) {
+            let cat = Object.values(cats[c])
+            let pair = Object.values(cat_pairs[p])
+
+            if(cat.includes(pair[0]) && cat.includes(pair[1])){
+                cat_pairs[p][2]++
+            }
+        }
+    }
+
+    for(let p = cat_pairs.length - 1; p >= 0; p--){
+        if(cat_pairs[p][2] === 0){
+            cat_pairs.splice(p, 1)
+        }
+    }
+
+    connections = cat_pairs
+}
+
+let rects = []
+
+console.log(counted)
