@@ -1,8 +1,8 @@
 function create_s(){
-    let start_x = 10
-    let start_y = 10
-    let width = 80
-    let margin_x = 250
+    let start_x = 40
+    let start_y = 40
+    let width = 70
+    let margin_x = 220
     let margin_y = 0
     let full_h = 700
     let x = start_x
@@ -63,10 +63,10 @@ function create_s(){
 }
 
 function sankey_mono(colors){
-    let start_x = 10
-    let start_y = 10
-    let width = 80
-    let margin_x = 250
+    let start_x = 40
+    let start_y = 40
+    let width = 70
+    let margin_x = 220
     let margin_y = 0
     let full_h = 700
     let x = start_x
@@ -90,12 +90,13 @@ function sankey_mono(colors){
 
             rects.push(r)
 
-            stroke(100)
-            strokeWeight(0.5)
+            // stroke(100)
+            // strokeWeight(0.5)
 
-            // noStroke()
+            noStroke()
             let color_storage = r.color
-            r.color.setAlpha(200)
+            if(r.element !== colors[2])
+                r.color.setAlpha(180)
             r.draw(x, y)
             r.connected = y
             r.bottom = y + height
@@ -104,17 +105,27 @@ function sankey_mono(colors){
             if(poss_con) {
                 conn_height = poss_con[2] / category[k] * height
                 fill(colors[1])
-
                 let _x = x
-                let _y = y + (height - conn_height)
-                while(_y <= y+height){
-                    circle(_x, _y, 2)
-                    _x += 4
-                    if(_x > x + width - 1){
+                let _y = r.bottom - 4
+                while(_y >= y + (height - conn_height)){
+                    circle(_x, _y, 4)
+                    _x += 6
+                    if(_x > x + width - 2){
                         _x = x
-                        _y += 4
+                        _y -= 6
                     }
                 }
+
+                textSize(20)
+                textStyle(BOLD)
+                fill(3)
+                // let percent =
+                let percent = Number.parseFloat(poss_con[2]/category[k] * 100).toFixed(1)
+                text(percent + "%", x, _y - 10, width, 40)
+            }
+            else if (r.category !== find_category(colors[2])) {
+                fill(1)
+                text("0%", x, r.bottom - 14, width, 40)
             }
 
             noStroke()

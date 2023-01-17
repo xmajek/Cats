@@ -72,7 +72,7 @@ function clean_data(){
             animal.animalage = "Mature"
         }
         else {
-            animal.animalage = "Super Senior"
+            animal.animalage = "Senior"
         }
 
         // kolor
@@ -124,7 +124,7 @@ function count(){
     age_order.push(age[2])
     age_order.push(age[0])
     age_order.push(age[1])
-    age_order.push(age[5])
+    // age_order.push(age[5])
 
     for(let n in age_order){
         counted.age[age_order[n]] = cats.reduce((acc, cur) => cur.animalage === age_order[n] ? ++acc : acc, 0);

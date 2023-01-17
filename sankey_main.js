@@ -25,6 +25,15 @@ function draw() {
     noLoop()
     if(colors.length > 0) sankey_mono(colors)
     else create_s()
+
+    noStroke()
+    fill(1)
+    textSize(12)
+    text("GENDER", 75, 30)
+    text("AGE", 370, 30)
+    text("COLOR", 652, 30)
+    text("BREED", 945, 30)
+    text("STATUS", 1233, 30)
     // rects = []
 }
 
@@ -47,14 +56,18 @@ function mouseClicked(){
 function mouseMoved() {
     let el = rects.find(el => mouseX >= el.x && mouseX <= el.x + el.width && mouseY >= el.y && mouseY <= el.y + el.height)
     if(el) {
-        el.hovered = true
         noStroke()
         let col = el.color
+        col.setAlpha(255)
         fill(col)
         rect(el.x + el.width + 10, el.y + el.height/2 - 45, 90, 90);
-        fill(1)
-        if(el.element === "Domestic Short Hair" || el.element === "Black") fill(255)
+        fill(255)
+        textStyle(BOLD);
+        textSize(12)
         text(el.element, el.x + el.width + 10, el.y + el.height/2 - 35, 90, 90)
+        textStyle(NORMAL);
+        textSize(24)
+        text(el.count, el.x + el.width + 10, el.y + el.height/2 + 5, 90, 90)
     }
     else{
         rects = []

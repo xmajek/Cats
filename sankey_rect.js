@@ -48,13 +48,13 @@ class SankeyRect{
                 this.color = color("#9b0a00")
                 break
             case "Black":
-                this.color = color("#2d2d2d")
+                this.color = color("#1e1e1e")
                 break
             case "Grey":
-                this.color = color("#707070")
+                this.color = color("#838383")
                 break
             case "Cream":
-                this.color = color("#fdd490")
+                this.color = color("#d7ae6b")
                 break
             case "Brown":
                 this.color = color("#603819")
@@ -68,10 +68,7 @@ class SankeyRect{
             case "White":
                 this.color = color("#c5c3c3")
                 break
-            case "Maine Coon":
-            case "Manx":
             case "Other":
-            case "Siamese":
                 this.color = color("#90e0ef")
                 break
             case "Domestic Long Hair":
@@ -81,7 +78,7 @@ class SankeyRect{
                 this.color = color("#0077b6")
                 break
             case "Domestic Short Hair":
-                this.color = color("#03045e")
+                this.color = color("#1a4dab")
                 break
             case "Adoption":
                 this.color = color("#90a955")
