@@ -7,12 +7,14 @@ class SankeyRect{
         this.count = count
         this.colorize(element)
         this.connected = 0
+        this.hovered = false
     }
     draw(x, y){
         fill(this.color);
         rect(x, y, this.width, this.height)
         this.x = x
         this.y = y
+        this.connected = y
     }
 
 
@@ -49,7 +51,7 @@ class SankeyRect{
                 this.color = color("#2d2d2d")
                 break
             case "Grey":
-                this.color = color("#8b8b8c")
+                this.color = color("#707070")
                 break
             case "Cream":
                 this.color = color("#fdd490")
@@ -61,10 +63,10 @@ class SankeyRect{
                 this.color = color("#5f111e")
                 break
             case "Orange":
-                this.color = color("#ec681c")
+                this.color = color("#e57c42")
                 break
             case "White":
-                this.color = color("#edeceb")
+                this.color = color("#c5c3c3")
                 break
             case "Maine Coon":
             case "Manx":

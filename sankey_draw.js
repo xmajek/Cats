@@ -4,7 +4,7 @@ function create_s(){
     let width = 80
     let margin_x = 250
     let margin_y = 0
-    let full_h = 800
+    let full_h = 700
     let x = start_x
     let y = start_y
 
@@ -26,9 +26,6 @@ function create_s(){
             r.draw(x, y)
             r.connected = y
 
-            fill(31);
-            text(k, x + 5, y + height/2 + 5)
-
             let x1, x2, y1, y2
             y2 = y
             if(c !== "sex"){
@@ -44,7 +41,7 @@ function create_s(){
 
                         prev_r.connected = y1 + con_h/2
                         noFill();
-                        let _color = color(prev_r.color)
+                        let _color = color(r.color)
 
                         _color.setAlpha(150)
                         stroke(_color)
@@ -71,9 +68,10 @@ function sankey_mono(colors){
     let width = 80
     let margin_x = 250
     let margin_y = 0
-    let full_h = 800
+    let full_h = 700
     let x = start_x
     let y = start_y
+    let clicked_category = find_category(colors[2])
 
     let prev = 0
     let height, y_max, category, is_conn
@@ -89,15 +87,15 @@ function sankey_mono(colors){
             height = category[k] / y_max * new_full_h
 
             let r = new SankeyRect(c, k, height, width, category[k])
-            if(r.element === colors[2]) r.color = colors[1]
-            else r.color = colors[0]
 
             rects.push(r)
 
-            stroke(1)
-            strokeWeight(1)
+            stroke(100)
+            strokeWeight(0.5)
 
-
+            // noStroke()
+            let color_storage = r.color
+            r.color.setAlpha(200)
             r.draw(x, y)
             r.connected = y
             r.bottom = y + height
@@ -105,14 +103,21 @@ function sankey_mono(colors){
             let conn_height
             if(poss_con) {
                 conn_height = poss_con[2] / category[k] * height
-                noStroke()
                 fill(colors[1])
-                rect(x, y + (height - conn_height), width, conn_height)
+
+                let _x = x
+                let _y = y + (height - conn_height)
+                while(_y <= y+height){
+                    circle(_x, _y, 2)
+                    _x += 4
+                    if(_x > x + width - 1){
+                        _x = x
+                        _y += 4
+                    }
+                }
             }
 
             noStroke()
-            fill(31);
-            text(k, x + 5, y + height/2 + 5)
 
             let x1, x2, y1, y2
             y2 = y
@@ -129,15 +134,30 @@ function sankey_mono(colors){
 
                         prev_r.connected = y1 + con_h/2
                         noFill();
-                        let _color = color(colors[0])
+                        let _color = color_storage
+                        if(colors[2] === r.element) _color.setAlpha(150)
+                        else _color.setAlpha(40)
 
-                        _color.setAlpha(150)
                         stroke(_color)
                         strokeWeight(con_h)
                         bezier(x1, y1, x1 + 60, y1, x2 - 60, y2, x2, y2)
+
+                        //klikniete
+                        if(poss_con) {
+                            if (prev_r.category !== clicked_category || prev_r.element === colors[2]) {
+                                let weight = poss_con[2] / r.count * con_h
+                                let _y1 = y1 + con_h / 2 - weight / 2
+                                let _y2 = y2 + con_h / 2 - weight / 2
+                                _color = colors[1]
+                                _color.setAlpha(150)
+                                stroke(_color)
+                                strokeWeight(weight)
+                                bezier(x1, _y1, x1 + 60, _y1, x2 - 60, _y2, x2, _y2)
+                            }
+                        }
                         y2 += con_h/2
-                        // line(x1, y1, x2, y2)
                     }
+
                 }
             }
 
@@ -148,6 +168,40 @@ function sankey_mono(colors){
         new_full_h = full_h
         prev = category
     }
+}
+
+function find_category(el){
+    switch (el){
+        case "Female":
+        case "Male":
+        case "Unknown":
+            return "sex"
+        case "Kitten":
+        case "Junior":
+        case "Adult":
+        case "Mature":
+        case "Senior":
+        case "Super Senior":
+            return "age"
+        case "Black":
+        case "Grey":
+        case "Cream":
+        case "Brown":
+        case "Multicolor":
+        case "Orange":
+        case "White":
+            return "colors"
+        case "Other":
+        case "Domestic Long Hair":
+        case "Domestic Short Hair":
+        case "Domestic Medium Hair":
+            return "breeds"
+        case "Adoption":
+        case "In shelter":
+            return "movement"
 
 
+
+
+    }
 }

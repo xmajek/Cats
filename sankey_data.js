@@ -90,9 +90,9 @@ function clean_data(){
         if(breed.includes("dlh") || breed.includes("domestic long hair")) animal.breedname = "Domestic Long Hair"
         else if(breed.includes("dmh") || breed.includes("domestic medium hair")) animal.breedname = "Domestic Medium Hair"
         else if(breed.includes("dsh") || breed.includes("domestic short hair")) animal.breedname = "Domestic Short Hair"
-        else if(other_breeds.includes(breed)) animal.breedname = "Other"
-        else if(breed.includes("siamese")) animal.breedname = "Siamese"
-        else animal.breedname[0].toUpperCase()
+        // else if(other_breeds.includes(breed)) animal.breedname = "Other"
+        // else if(breed.includes("siamese")) animal.breedname = "Siamese"
+        else animal.breedname = "Other"
 
         // status
         movement = animal.movementtype
