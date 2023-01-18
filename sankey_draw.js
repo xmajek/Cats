@@ -104,10 +104,12 @@ function sankey_mono(colors){
             let conn_height
             if(poss_con) {
                 conn_height = poss_con[2] / category[k] * height
-                fill(colors[1])
+                color_storage = colors[1]
+                color_storage.setAlpha(255)
+                fill(color_storage)
                 let _x = x
                 let _y = r.bottom - 4
-                while(_y >= y + (height - conn_height)){
+                while(_y >= y + (height - conn_height) - 5){
                     circle(_x, _y, 4)
                     _x += 6
                     if(_x > x + width - 2){
@@ -192,7 +194,7 @@ function find_category(el){
         case "Adult":
         case "Mature":
         case "Senior":
-        case "Super Senior":
+        // case "Super Senior":
             return "age"
         case "Black":
         case "Grey":

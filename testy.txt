@@ -1,0 +1,18 @@
+skuteczność - liczba zadań zakończonych sukcesem
+
+wydajność - stosunek procentu poprawnych odpowiedzi do średniego czasu realizacji zadania przez wszystkich uczestników
+
+satysfakcja - sus
+
+Wykonaj to zadanie najszybciej jak potrafisz
+
+
+Chcesz zaadoptować po jednym kocie w każdym dostępnym kolorze.
+- Podaj ilość kotów, które będziesz mieć
+
+Wyobraź sobie, że jesteś wolontariuszem w schronisku i chcesz przeprowadzić akcję adoptowania kotów. W tym celu zbierasz informacje na temat aktualnej liczby kotów w schronisku.
+- Podaj ilość kotów, które nie zostały jeszcze adoptowane.
+
+Twoją ulubioną bajką w dzieciństwie była bajka "Garfield" o kocie uwielbiającym lazanię. Ostatnio stwierdziłeś/aś, że chcesz takiego kociego towarzysza w swoim domu. W tym celu chcesz zaadoptować kota przypominającego twoją ulubioną postać.
+- Podaj jaka część kotów dostępnych do adopcji jest koloru rudego
+
