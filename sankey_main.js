@@ -28,12 +28,15 @@ function draw() {
 
     noStroke()
     fill(1)
+    textSize(24)
+    textStyle(BOLD)
+    text("FEATURES OF CATS THAT HAS BEEN THROUGH THE SHELTER", 40, 20, 1250, 30)
     textSize(12)
-    text("GENDER", 75, 30)
-    text("AGE", 370, 30)
-    text("COLOR", 652, 30)
-    text("BREED", 945, 30)
-    text("STATUS", 1233, 30)
+    text("GENDER", 75, 80)
+    text("AGE", 370, 80)
+    text("COLOR", 652, 80)
+    text("BREED", 945, 80)
+    text("STATUS", 1233, 80)
     // rects = []
 }
 
@@ -55,6 +58,11 @@ function mouseClicked(){
 
 function mouseMoved() {
     let el = rects.find(el => mouseX >= el.x && mouseX <= el.x + el.width && mouseY >= el.y && mouseY <= el.y + el.height)
+
+    rects = []
+        clear()
+        redraw()
+
     if(el) {
         noStroke()
         let col = el.color
@@ -68,12 +76,19 @@ function mouseMoved() {
         textStyle(NORMAL);
         textSize(24)
         text(el.count, el.x + el.width + 10, el.y + el.height/2 + 5, 90, 90)
+        
+        // if(colors.length > 0){
+        //     fill(colors[1])
+        //     rect(el.x + el.width + 10, el.bottom - 40, 90, 40)
+        //     fill(255)
+        //     text(el.percent, el.x + el.width + 10, el.bottom - 15, 90, 40)
+        // }
     }
-    else{
-        rects = []
-        clear()
-        redraw()
-    }
+    // else{
+    //     rects = []
+    //     clear()
+    //     redraw()
+    // }
     // prevent default
     return false;
 }

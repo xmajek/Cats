@@ -1,6 +1,6 @@
 function create_s(){
     let start_x = 40
-    let start_y = 40
+    let start_y = 100
     let width = 70
     let margin_x = 220
     let margin_y = 0
@@ -64,7 +64,7 @@ function create_s(){
 
 function sankey_mono(colors){
     let start_x = 40
-    let start_y = 40
+    let start_y = 100
     let width = 70
     let margin_x = 220
     let margin_y = 0
@@ -124,6 +124,7 @@ function sankey_mono(colors){
                 // let percent =
                 let percent = Number.parseFloat(poss_con[2]/category[k] * 100).toFixed(1)
                 text(percent + "%", x, _y - 10, width, 40)
+                r.percent = poss_con[2]/category[k]
             }
             else if (r.category !== find_category(colors[2])) {
                 fill(1)
